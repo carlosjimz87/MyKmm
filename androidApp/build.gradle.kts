@@ -1,15 +1,16 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
     namespace = "carlos.jimenezp.vasscompany.mykmm.android"
-    compileSdk = 34
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "carlos.jimenezp.vasscompany.mykmm.android"
-        minSdk = 26
-        targetSdk = 34
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }
@@ -36,6 +37,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    dependencies {
+        debugImplementation(libs.compose.ui.tooling)
+    }
 }
 
 dependencies {
@@ -45,5 +49,4 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.kotlinx.coroutines.android)
-    debugImplementation(libs.compose.ui.tooling)
 }

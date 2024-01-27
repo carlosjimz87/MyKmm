@@ -26,13 +26,21 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.ktor.client.core)
-            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.moko.mvvm.core)
+            implementation(libs.moko.mvvm.compose)
+            implementation(libs.kamel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
         androidMain.dependencies {
+            implementation(libs.compose.ui)
+            implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
+
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -42,8 +50,9 @@ kotlin {
 
 android {
     namespace = "carlos.jimenezp.vasscompany.mykmm"
-    compileSdk = 34
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+
     defaultConfig {
-        minSdk = 26
+        minSdk = libs.versions.android.minSdk.get().toInt()
     }
 }
